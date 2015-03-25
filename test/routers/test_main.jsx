@@ -1,10 +1,10 @@
 import React from "react/addons";
 let { TestUtils } = React.addons;
 
-import LoggedOutRouter from "../../src/routers/logged_out";
+import MainRouter from "../../src/routers/main";
 
 
-describe("LoggedOut Router", function() {
+describe("MainRouter Router", function() {
   it("should return proper routes");
   it("should render proper handler for path");
 });

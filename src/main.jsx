@@ -2,34 +2,24 @@
  * App entry point
  */
 
-// Polyfill
 import "babel-core/polyfill";
 
-// Libraries
 import React from "react";
 import Router from "react-router";
 
-// Common utilities
-import Session from "./common/session";
+import DataFilter from "./common/data_filter";
+import MainRouter from "./routers/main";
 
-// Routers
-import LoggedOutRouter from "./routers/logged_out";
-import LoggedInRouter from "./routers/logged_in";
+var data2015 = require("./2015.json");
+var data2014 = require("./2014.json");
 
-
-// ID of the DOM element to mount app on
 const DOM_APP_EL_ID = "app";
 
+let routes = MainRouter.getRoutes();
 
-// Initialize routes depending on session
-let routes;
+console.log(DataFilter.getResults(data2014));
 
-if (Session.isLoggedIn()) {
-  routes = LoggedInRouter.getRoutes();
-} else {
-  routes = LoggedOutRouter.getRoutes();
-}
-
+console.log(DataFilter.getResultsByType(data2014));
 /**
  * Given a set of routes and params associated with the current active state,
  * call #fetchData(params) on all Route Handlers that define that static method.

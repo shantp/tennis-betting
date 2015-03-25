@@ -5,7 +5,7 @@ let { Route, DefaultRoute, RouteHandler, Link } = Router;
 import HomePage from "../pages/home/page";
 
 
-export default class LoggedInRouter extends React.Component {
+export default class MainRouter extends React.Component {
   render() {
     return (
       <div id="container">
@@ -25,9 +25,9 @@ export default class LoggedInRouter extends React.Component {
   }
 }
 
-LoggedInRouter.getRoutes = function() {
+MainRouter.getRoutes = function() {
   return (
-    <Route name="app" path="/" handler={LoggedInRouter}>
+    <Route name="app" path="/" handler={MainRouter}>
       <DefaultRoute name="home" handler={HomePage} />
     </Route>
   );

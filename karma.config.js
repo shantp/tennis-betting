@@ -69,7 +69,8 @@ module.exports = function(config) {
     webpack: {
       module: {
         loaders: [
-          { test: /\.jsx?$/, exclude: /node_modules/, loader: "babel-loader"}
+          { test: /\.jsx?$/, exclude: /node_modules/, loader: "babel-loader"},
+          { test: /\.json$/, loader: "json-loader" }
         ],
         postLoaders: [{
           test: /\.jsx?$/,

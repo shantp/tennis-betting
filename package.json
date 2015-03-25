@@ -41,6 +41,7 @@
     "karma-sauce-launcher": "^0.2.10",
     "karma-sinon-chai": "^0.3.0",
     "karma-webpack": "^1.5.0",
+    "lodash": "^3.5.0",
     "phantomjs": "^1.9.16",
     "react-hot-loader": "^1.2.3",
     "webpack": "^1.7.2",
@@ -48,6 +49,6 @@
   },
   "dependencies": {
     "react": "^0.13.1",
-    "react-router": "^0.13.1"
+    "react-router": "^0.13.2"
   }
 }
