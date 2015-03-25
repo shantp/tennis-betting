@@ -28,8 +28,10 @@
   },
   "homepage": "https://github.com/pheuter/essential-react",
   "devDependencies": {
+    "accounting": "^0.4.1",
     "babel-core": "^4.7.8",
     "babel-loader": "^4.1.0",
+    "bootstrap": "^3.3.4",
     "coveralls": "^2.11.2",
     "express": "^4.12.2",
     "istanbul": "^0.3.7",
@@ -41,6 +43,7 @@
     "karma-sauce-launcher": "^0.2.10",
     "karma-sinon-chai": "^0.3.0",
     "karma-webpack": "^1.5.0",
+    "less": "^2.4.0",
     "lodash": "^3.5.0",
     "phantomjs": "^1.9.16",
     "react-hot-loader": "^1.2.3",

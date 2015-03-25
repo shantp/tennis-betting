@@ -1,23 +1,37 @@
-import React from "react";
-import { getData } from "../../common/request";
+"use strict";
+
+import React from 'react';
+import DataFilter from '../../common/data_filter';
+import Results from '../../common/results';
+import BetTypes from '../../common/bet_types';
 
 
 export default class HomePage extends React.Component {
   componentWillMount() {
-    console.log("[HomePage] will mount with server response: ", this.props.data.home);
+    this.setState(this.refreshData(this.props.data));
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState(this.refreshData(nextProps.data));
+  }
+
+  refreshData(data) {
+    let bets = data;
+    let results = DataFilter.getResults(data);
+    let typeresults = DataFilter.getResultsByType(data);
+    return {
+      bets,
+      results,
+      typeresults
+    };
   }
 
   render() {
-    let { title } = this.props.data.home;
-
     return (
-      <div id="home-page">
-        <h1>{title}</h1>
+      <div>
+        <Results results={this.state.results} year="2014" />
+        <BetTypes results={this.state.typeresults} />
       </div>
-    );
+    )
   }
-}
-
-HomePage.fetchData = function(params) {
-  return getData("/home");
 }

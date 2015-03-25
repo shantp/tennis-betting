@@ -1,6 +1,6 @@
 import React from "react";
 import Router from "react-router";
-let { Route, DefaultRoute, RouteHandler, Link } = Router;
+let { Route, DefaultRoute, RouteHandler, Link, Redirect } = Router;
 
 import HomePage from "../pages/home/page";
 
@@ -12,7 +12,8 @@ export default class MainRouter extends React.Component {
         <div id="navigation">
           <header>
             <ul>
-              <li><Link to="home">Home</Link></li>
+              <li><Link to="2015">2015</Link></li>
+              <li><Link to="2014">2014</Link></li>
             </ul>
           </header>
         </div>
@@ -28,7 +29,9 @@ export default class MainRouter extends React.Component {
 MainRouter.getRoutes = function() {
   return (
     <Route name="app" path="/" handler={MainRouter}>
-      <DefaultRoute name="home" handler={HomePage} />
+      <Route name="2015" handler={HomePage} />
+      <Route name="2014" handler={HomePage} />
+      <DefaultRoute handler={HomePage} />
     </Route>
   );
 }
