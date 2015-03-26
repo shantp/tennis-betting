@@ -3,7 +3,7 @@
 import React from 'react';
 import DataFilter from '../../common/data_filter';
 import Results from '../../common/results';
-import {Table} from 'reactable';
+import {Table, Sort} from 'reactable';
 
 
 export default class HomePage extends React.Component {
@@ -19,10 +19,13 @@ export default class HomePage extends React.Component {
     let bets = data;
     let results = DataFilter.getResults(data);
     let typeresults = DataFilter.getResultsByType(data);
+    let tourneyresults = DataFilter.getResultsByTourney(data);
+    console.log(tourneyresults);
     return {
       bets,
       results,
-      typeresults
+      typeresults,
+      tourneyresults
     };
   }
 
@@ -34,17 +37,32 @@ export default class HomePage extends React.Component {
           year={this.props.year} />
         <Table
           className="table table-striped"
-          id="table"
+          id="types-table"
           data={this.state.typeresults}
-          sortable={true}
+          sortable={[{
+            column: "amount",
+            sortFunction: Sort.Currency
+          }]}
           columns={[
             {key: "type", label: "Type"},
             {key: "amount", label: "Amount"},
-            {key: "win", label: "Win"},
-            {key: "loss", label: "Loss"},
-            {key: "push", label: "Push"},
+            {key: "record", label: "Record"},
+          ]} />
+        <Table
+          className="table table-striped"
+          id="tourney-table"
+          data={this.state.tourneyresults}
+          sortable={[{
+            column: "amount",
+            sortFunction: Sort.Currency
+          }]}
+          columns={[
+            {key: "type", label: "Tournament"},
+            {key: "amount", label: "Amount"},
+            {key: "record", label: "Record"},
           ]} />
       </div>
     )
   }
 }
+

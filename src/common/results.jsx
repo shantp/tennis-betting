@@ -16,7 +16,7 @@ export default class Results extends React.Component {
         </div>
         <div className="record">
           <p>Record</p>
-          <h3>{this.props.results.win} - {this.props.results.loss} - {this.props.results.push}</h3>
+          <h3>{this.props.results.record}</h3>
         </div>
         <div className="roi">
           <p>ROI</p>
