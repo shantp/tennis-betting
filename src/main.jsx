@@ -1,7 +1,3 @@
-/**
- * App entry point
- */
-
 import "babel-core/polyfill";
 
 import React from "react";
@@ -19,7 +15,13 @@ const DOM_APP_EL_ID = "app";
 let routes = MainRouter.getRoutes();
 
 // Start the router
-Router.run(routes, function(Handler, state) {
-  let bets = data[state.pathname.slice(1)]
-  React.render(<Handler data={bets} />, document.getElementById(DOM_APP_EL_ID));
+Router.run(routes, Router.HistoryLocation, function(Handler, state) {
+  let year = state.pathname.slice(1);
+  let bets = data[year]
+  React.render(<Handler data={bets} year={year} />, document.getElementById(DOM_APP_EL_ID));
 });
+
+// Boostrap
+window.jQuery = require("jquery");
+require("bootstrap-webpack");
+require("./main.scss");

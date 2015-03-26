@@ -33,11 +33,14 @@ class DataFilter {
 
   getResultsByType(data) {
     let that = this;
-    let results = {}
+    let typeresults = [];
     _.each(this.getBetsByType(data), function(type, name){
-      results[name] = that.getResults(type);
+      let results = {}
+      results = that.getResults(type);
+      results.type = name.charAt(0).toUpperCase() + name.slice(1);
+      typeresults.push(results);
     });
-    return results;
+    return typeresults;
   }
 
 }

@@ -12,8 +12,8 @@ export default class MainRouter extends React.Component {
         <div id="navigation">
           <header>
             <ul>
-              <li><Link to="2015">2015</Link></li>
-              <li><Link to="2014">2014</Link></li>
+              <li><Link to="/2015">2015</Link></li>
+              <li><Link to="/2014">2014</Link></li>
             </ul>
           </header>
         </div>
@@ -29,9 +29,8 @@ export default class MainRouter extends React.Component {
 MainRouter.getRoutes = function() {
   return (
     <Route name="app" path="/" handler={MainRouter}>
-      <Route name="2015" handler={HomePage} />
-      <Route name="2014" handler={HomePage} />
-      <DefaultRoute handler={HomePage} />
+      <Route name="year" path="/:yearId" handler={HomePage} />
+      <Redirect from="/" to="/2015" />
     </Route>
   );
 }

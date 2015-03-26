@@ -7,10 +7,10 @@ export default class Results extends React.Component {
   render() {
     return (
       <div id="results">
-        <h4>Tennis Betting Results ~ {this.props.year}</h4>
+        <h4>Tennis Betting ~ {this.props.year} Season</h4>
         <div className="amount">
           <p>Amount</p>
-          <h3 className={(this.props.results.amount > 0 ? 'amountpos' : 'amountneg')}>
+          <h3 className={(this.props.results.amount < 0 ? 'amountneg' : 'amountpos')}>
             {accounting.formatMoney(this.props.results.amount)}
           </h3>
         </div>
