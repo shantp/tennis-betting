@@ -20,7 +20,6 @@ export default class HomePage extends React.Component {
     let results = DataFilter.getResults(data);
     let typeresults = DataFilter.getResultsByType(data);
     let tourneyresults = DataFilter.getResultsByTourney(data);
-    console.log(tourneyresults);
     return {
       bets,
       results,

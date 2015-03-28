@@ -7,7 +7,12 @@ class DataFilter {
   }
 
   getResults(data) {
-    let amount = 0, win = 0, loss = 0, push = 0, invested = 0, roi = 0;
+    let amount = 0;
+    let win = 0;
+    let loss = 0;
+    let push = 0;
+    let invested = 0;
+    let roi = 0;
     let record = {};
     _.each(data, function(bet) {
       amount += bet.payout;
@@ -23,11 +28,10 @@ class DataFilter {
   }
 
   getResultsByType(data) {
-    let that = this;
     let typeresults = [];
-    _.each(this.getBetsByType(data), function(type, name) {
+    _.each(this.getBetsByType(data), (type, name) => {
       let results = {}
-      results = that.getResults(type);
+      results = this.getResults(type);
       results.type = name.charAt(0).toUpperCase() + name.slice(1);
       results.amount = accounting.formatMoney(results.amount);
       typeresults.push(results);
@@ -36,11 +40,10 @@ class DataFilter {
   }
 
   getResultsByTourney(data) {
-    let that = this;
     let tourneyresults = [];
-    _.each(this.getBetsByTourney(data), function(tourney, name) {
+    _.each(this.getBetsByTourney(data), (tourney, name) => {
       let results = {};
-      results = that.getResults(tourney);
+      results = this.getResults(tourney);
       results.type = name;
       results.amount = accounting.formatMoney(results.amount);
       tourneyresults.push(results);
@@ -49,7 +52,8 @@ class DataFilter {
   }
 
   getBetsByType(data) {
-    let types = [], bets = {};
+    let types = [];
+    let bets = {};
     _.each(data, function(bet) {
       types.push(bet.bettype);
     });
@@ -61,7 +65,8 @@ class DataFilter {
   }
 
   getBetsByTourney(data) {
-    let tourneys = [], bets = {};
+    let tourneys = [];
+    let bets = {};
     _.each(data, function(bet) {
       if (bet.tourney != "") { tourneys.push(bet.tourney); }
     });
