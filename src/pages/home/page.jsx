@@ -3,6 +3,7 @@
 import React from 'react';
 import DataFilter from '../../common/data_filter';
 import Results from '../../common/results';
+import LineChart from '../../common/charts/d3_line_chart';
 import {Table, Sort} from 'reactable';
 
 
@@ -34,11 +35,16 @@ export default class HomePage extends React.Component {
         <Results
           results={this.state.results}
           year={this.props.year} />
+        <LineChart
+          width="700"
+          height="300"
+          bets={this.state.bets} />
         <Table
           className="table table-striped"
           id="types-table"
           data={this.state.typeresults}
-          sortable={[{
+          sortable={["type",
+          {
             column: "amount",
             sortFunction: Sort.Currency
           }]}
@@ -51,7 +57,8 @@ export default class HomePage extends React.Component {
           className="table table-striped"
           id="tourney-table"
           data={this.state.tourneyresults}
-          sortable={[{
+          sortable={["type",
+          {
             column: "amount",
             sortFunction: Sort.Currency
           }]}

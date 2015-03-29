@@ -1,3 +1,5 @@
+"use strict";
+
 import _ from "lodash";
 import accounting from "accounting";
 
@@ -21,7 +23,7 @@ class DataFilter {
       if (bet.result === 'p') { push++; }
       invested += bet.bet;
     });
-    record = win + " - " + loss + " - " + push;
+    record = win + ' - ' + loss + ' - ' + push;
     amount = Math.round(amount*100) / 100;
     roi = (amount/invested * 100).toFixed(3)/1;
     return {amount, record, roi};
@@ -30,7 +32,7 @@ class DataFilter {
   getResultsByType(data) {
     let typeresults = [];
     _.each(this.getBetsByType(data), (type, name) => {
-      let results = {}
+      let results = {};
       results = this.getResults(type);
       results.type = name.charAt(0).toUpperCase() + name.slice(1);
       results.amount = accounting.formatMoney(results.amount);
@@ -68,7 +70,7 @@ class DataFilter {
     let tourneys = [];
     let bets = {};
     _.each(data, function(bet) {
-      if (bet.tourney != "") { tourneys.push(bet.tourney); }
+      if (bet.tourney !== '') { tourneys.push(bet.tourney); }
     });
     tourneys = _.uniq(tourneys).sort();
     _.each(tourneys, function(tourney) {
