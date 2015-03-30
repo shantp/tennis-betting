@@ -1,8 +1,8 @@
-import React from "react";
-import Router from "react-router";
+import React from 'react';
+import Router from 'react-router';
 let { Route, DefaultRoute, RouteHandler, Link, Redirect } = Router;
 
-import HomePage from "../pages/home/page";
+import HomePage from '../pages/home/page';
 
 
 export default class MainRouter extends React.Component {

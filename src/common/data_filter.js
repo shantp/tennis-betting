@@ -1,7 +1,5 @@
-"use strict";
-
-import _ from "lodash";
-import accounting from "accounting";
+import _ from 'lodash';
+import accounting from 'accounting';
 
 class DataFilter {
 
@@ -70,17 +68,17 @@ class DataFilter {
     let tourneys = [];
     let bets = {};
     _.each(data, function(bet) {
-      if (bet.tourney !== '') { tourneys.push(bet.tourney); }
+      if (bet.tourney) { tourneys.push(bet.tourney); }
     });
     tourneys = _.uniq(tourneys).sort();
     _.each(tourneys, function(tourney) {
-      bets[tourney] = _.filter(data, {tourney: tourney});
+      bets[tourney] = _.filter(data, {tourney});
     });
     return bets;
   }
 
 }
 
-let data_filter = new DataFilter();
+let dataFilter = new DataFilter();
 
-export default data_filter;
+export default dataFilter;

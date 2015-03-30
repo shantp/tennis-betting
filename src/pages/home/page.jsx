@@ -1,5 +1,3 @@
-"use strict";
-
 import React from 'react';
 import DataFilter from '../../common/data_filter';
 import Results from '../../common/results';
