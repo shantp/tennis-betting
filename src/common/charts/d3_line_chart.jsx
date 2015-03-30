@@ -1,6 +1,8 @@
 import React from 'react';
 import d3 from 'd3';
 import _ from 'lodash';
+import accounting from 'accounting';
+import moment from 'moment';
 
 export default class LineChart extends React.Component {
 
@@ -10,6 +12,30 @@ export default class LineChart extends React.Component {
 
   componentDidUpdate() {
     this.drawChart();
+  }
+
+  makeTooltip(bet) {
+    var line = bet.line > 0 ? '+' + bet.line : bet.line;
+    if (bet.bettype.toLowerCase() === 'total') { line = "" };
+    var payoutClass = bet.payout > 0 ? 'betpos' : 'betneg';
+    if (bet.payout == 0) { payoutClass = 'betpush' };
+    var payout = accounting.formatMoney(bet.payout);
+    var amountClass = bet.amount > 0 ? 'amountpos' : 'amountneg';
+    var amount = accounting.formatMoney(bet.amount);
+    var nicedate = moment(bet.date).format("MMMM Do YYYY");
+    return `
+      <div class="tipdate">
+        ${nicedate}
+      </div>
+      <div class="tipline">
+        ${bet.hero} ${line}
+      </div>
+      <div class="tippayout ${payoutClass}">
+        ${payout}
+      </div>
+      <div class="tipamount ${amountClass}">
+        ${amount}
+      </div>`;
   }
 
   drawChart() {
@@ -38,23 +64,21 @@ export default class LineChart extends React.Component {
       .append('g')
       .attr('transform', 'translate(' + margin.left + ', ' + margin.top + ')');
 
+    let tooltip = d3.select('#linechart').append('div')
+      .attr('class', 'tooltip')
+      .style('opacity', 0);
+
     let mousemove = () => {
       let x0 = x.invert(d3.mouse(svg.node())[0]);
       let i = bisectDate(this.props.bets, x0, 1);
       let d0 = this.props.bets[i-1];
       let d1 = this.props.bets[i];
       let d = x0 - d0.date > d1.date - x0 ? d1: d0;
-      focus.attr('transform', 'translate(' + x(d.date) + ',' + y(d.amount) + ')');
-      focus.select('text').text(d.amount);
+      let chartTop = d3.select('#linechart').node().offsetTop;
+      tooltip.html(this.makeTooltip(d));
+      tooltip.style('left', (x(d.date) + margin.left + 10 + 'px'))
+        .style('top', (y(d.amount) + chartTop + 'px'));
     };
-
-    let focus = svg.append('g')
-      .attr('class', 'focus')
-      .style('display', 'none');
-
-    focus.append('text')
-      .attr('x', 9)
-      .attr('dy', '.35em');
 
     _.each(this.props.bets, (d) => {
       if (typeof d.date === 'string') {
@@ -89,8 +113,8 @@ export default class LineChart extends React.Component {
       .attr('class', 'overlay')
       .attr('width', width)
       .attr('height', height)
-      .on('mouseover', () => { focus.style('display', null); })
-      .on('mouseout', () => { focus.style('display', 'none'); })
+      .on('mouseover', () => { tooltip.style('opacity', 1); })
+      .on('mouseout', () => { tooltip.style('opacity', 0); })
       .on('mousemove', mousemove);
   }
 
