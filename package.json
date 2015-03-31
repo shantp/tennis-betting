@@ -56,6 +56,7 @@
     "node-sass": "^3.0.0-pre",
     "phantomjs": "^1.9.16",
     "react-hot-loader": "^1.2.3",
+    "react-select": "^0.4.5",
     "reactable": "^0.10.1",
     "sass-loader": "^1.0.0",
     "style-loader": "^0.9.0",

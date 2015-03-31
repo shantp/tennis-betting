@@ -16,13 +16,13 @@ export default class LineChart extends React.Component {
 
   makeTooltip(bet) {
     var line = bet.line > 0 ? '+' + bet.line : bet.line;
-    if (bet.bettype.toLowerCase() === 'total') { line = "" };
+    if (bet.bettype === 'total') { line = '' };
     var payoutClass = bet.payout > 0 ? 'betpos' : 'betneg';
     if (bet.payout == 0) { payoutClass = 'betpush' };
     var payout = accounting.formatMoney(bet.payout);
     var amountClass = bet.amount > 0 ? 'amountpos' : 'amountneg';
     var amount = accounting.formatMoney(bet.amount);
-    var nicedate = moment(bet.date).format("MMMM Do YYYY");
+    var nicedate = moment(bet.date).format('MMMM Do YYYY');
     return `
       <div class="tipdate">
         ${nicedate}
@@ -46,7 +46,7 @@ export default class LineChart extends React.Component {
     let height = this.props.height - margin.top - margin.bottom;
 
     let parseDate = d3.time.format('%x').parse;
-    let bisectDate = d3.bisector((d) => { return d.date; }).left;
+    let bisectDate = d3.bisector((d) => { return d.dateObj; }).left;
 
     let x = d3.time.scale().range([0, width]);
     let y = d3.scale.linear().range([height, 0]);
@@ -55,7 +55,7 @@ export default class LineChart extends React.Component {
     let yAxis = d3.svg.axis().scale(y).orient('left');
 
     let line = d3.svg.line()
-      .x((d) => {return x(d.date); })
+      .x((d) => {return x(d.dateObj); })
       .y((d) => {return y(d.amount); });
 
     let svg = d3.select('#linechart').append('svg')
@@ -73,20 +73,20 @@ export default class LineChart extends React.Component {
       let i = bisectDate(this.props.bets, x0, 1);
       let d0 = this.props.bets[i-1];
       let d1 = this.props.bets[i];
-      let d = x0 - d0.date > d1.date - x0 ? d1: d0;
+      let d = x0 - d0.dateObj > d1.dateObj - x0 ? d1: d0;
       let chartTop = d3.select('#linechart').node().offsetTop;
       tooltip.html(this.makeTooltip(d));
-      tooltip.style('left', (x(d.date) + margin.left + 10 + 'px'))
+      tooltip.style('left', (x(d.dateObj) + margin.left + 10 + 'px'))
         .style('top', (y(d.amount) + chartTop + 'px'));
     };
 
     _.each(this.props.bets, (d) => {
       if (typeof d.date === 'string') {
-        d.date = parseDate(d.date);
+        d.dateObj = parseDate(d.date);
       }
     });
 
-    x.domain(d3.extent(this.props.bets, (d) => { return d.date; }));
+    x.domain(d3.extent(this.props.bets, (d) => { return d.dateObj; }));
     y.domain(d3.extent(this.props.bets, (d) => { return d.amount; }));
 
     svg.append('g')

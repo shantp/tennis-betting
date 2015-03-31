@@ -2,6 +2,7 @@ import React from 'react';
 import DataFilter from '../../common/data_filter';
 import Results from '../../common/results';
 import LineChart from '../../common/charts/d3_line_chart';
+import FilterTable from '../../common/filter_table';
 import {Table, Sort} from 'reactable';
 
 
@@ -37,6 +38,7 @@ export default class HomePage extends React.Component {
           width="700"
           height="300"
           bets={this.state.bets} />
+        {/*<FilterTable bets={this.state.bets} />*/}
         <Table
           className="table table-striped"
           id="types-table"
