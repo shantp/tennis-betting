@@ -1,13 +1,15 @@
 import React from 'react';
 import _ from 'lodash';
 
+require('./league_toggle.scss');
+
 export default class LeagueToggle extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       boxes: [
-        {value: 'ATP', checked: true},
-        {value: 'WTA', checked: true}
+        {value: 'atp', checked: true},
+        {value: 'wta', checked: true}
       ]
     };
   }
@@ -28,7 +30,7 @@ export default class LeagueToggle extends React.Component {
       });
     }
     let league = _.filter(newBoxes, {'checked': true});
-    league = league.length > 1 ? 'all' : league[0].value.toLowerCase();
+    league = league.length > 1 ? '' : league[0].value.toLowerCase();
     this.props.onLeagueChange(league);
     this.setState({ boxes: newBoxes });
   }

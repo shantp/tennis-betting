@@ -1,6 +1,8 @@
 import React from 'react';
 import accounting from 'accounting';
 
+require('./results.scss');
+
 export default class Results extends React.Component {
   render() {
     return (
@@ -18,6 +20,14 @@ export default class Results extends React.Component {
         <div className="roi">
           <p>ROI</p>
           <h3>{this.props.results.roi}%</h3>
+        </div>
+        <div className="average">
+          <p>Average Bet Size</p>
+          <h3>{accounting.formatMoney(this.props.results.averageBet)}</h3>
+        </div>
+        <div className="total">
+          <p>Bets Made</p>
+          <h3>{this.props.results.totalBets}</h3>
         </div>
       </div>
     );

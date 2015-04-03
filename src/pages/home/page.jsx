@@ -35,11 +35,11 @@ export default class HomePage extends React.Component {
     });
   }
 
-  refreshData(data) {
-    let bets = data;
-    let results = DataFilter.getResults(data);
-    let typeresults = DataFilter.getResultsByType(data);
-    let tourneyresults = DataFilter.getResultsByTourney(data);
+  refreshData(data, league = '') {
+    let bets = DataFilter.getBetsByLeague(data, league);
+    let results = DataFilter.getResults(bets);
+    let typeresults = DataFilter.getResultsByType(bets);
+    let tourneyresults = DataFilter.getResultsByTourney(bets);
     return {
       bets,
       results,
@@ -49,14 +49,14 @@ export default class HomePage extends React.Component {
   }
 
   changeLeague(league) {
-
+    this.setState(this.refreshData(this.props.data, league));
   }
 
   render() {
     return (
       <div>
         <h4>Tennis Betting ~ {this.props.year} Season</h4>
-        <LeagueToggle onLeagueChange={this.changeLeague} />
+        <LeagueToggle onLeagueChange={this.changeLeague.bind(this)} />
         <Results
           results={this.state.results} />
         <LineChart
