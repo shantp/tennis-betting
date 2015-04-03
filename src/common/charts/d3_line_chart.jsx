@@ -4,6 +4,8 @@ import _ from 'lodash';
 import accounting from 'accounting';
 import moment from 'moment';
 
+require('./d3_line_chart.scss');
+
 export default class LineChart extends React.Component {
 
   componentDidMount() {
@@ -16,9 +18,9 @@ export default class LineChart extends React.Component {
 
   makeTooltip(bet) {
     var line = bet.line > 0 ? '+' + bet.line : bet.line;
-    if (bet.bettype === 'total') { line = '' };
+    if (bet.bettype === 'total') { line = ''; };
     var payoutClass = bet.payout > 0 ? 'betpos' : 'betneg';
-    if (bet.payout == 0) { payoutClass = 'betpush' };
+    if (bet.payout === 0) { payoutClass = 'betpush'; };
     var payout = accounting.formatMoney(bet.payout);
     var amountClass = bet.amount > 0 ? 'amountpos' : 'amountneg';
     var amount = accounting.formatMoney(bet.amount);
@@ -108,6 +110,14 @@ export default class LineChart extends React.Component {
       .datum(this.props.bets)
       .attr('class', 'line')
       .attr('d', line);
+
+    svg.selectAll('.dot')
+      .data(this.props.bets)
+      .enter().append('circle')
+      .attr('cx', (d) => { return x(d.dateObj); })
+      .attr('cy', (d) => { return y(d.amount); })
+      .attr('r', 3)
+      .attr('class', 'dot');
 
     svg.append('rect')
       .attr('class', 'overlay')

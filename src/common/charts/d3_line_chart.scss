@@ -1,0 +1,44 @@
+#linechart {
+  font-size: 0.8em;
+
+  .tooltip {
+    position: absolute;
+    width: 200px;
+    height: 100px;
+    pointer-events: none;
+    background: white;
+    border: 1px solid grey;
+  }
+
+  .axis path,
+  .axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+  }
+
+  .x.axis path {
+    display: none;
+  }
+
+  .line {
+    fill: none;
+    stroke: dodgerblue;
+    stroke-width: 1.5px;
+  }
+
+  .dot {
+    fill: white;
+    stroke: dodgerblue;
+    stroke-width: 1.5px;
+  }
+
+  .overlay {
+    fill: none;
+    pointer-events: all;
+  }
+
+  .focus circle {
+    fill: none;
+  }
+}

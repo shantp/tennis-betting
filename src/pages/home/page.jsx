@@ -28,13 +28,17 @@ export default class HomePage extends React.Component {
     };
   }
 
+  changeLeague(league) {
+
+  }
+
   render() {
     return (
       <div>
-        <LeagueToggle />
+        <h4>Tennis Betting ~ {this.props.year} Season</h4>
+        <LeagueToggle onLeagueChange={this.changeLeague} />
         <Results
-          results={this.state.results}
-          year={this.props.year} />
+          results={this.state.results} />
         <LineChart
           width="700"
           height="300"

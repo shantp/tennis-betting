@@ -27,6 +27,9 @@ export default class LeagueToggle extends React.Component {
         };
       });
     }
+    let league = _.filter(newBoxes, {'checked': true});
+    league = league.length > 1 ? 'all' : league[0].value.toLowerCase();
+    this.props.onLeagueChange(league);
     this.setState({ boxes: newBoxes });
   }
 

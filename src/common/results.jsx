@@ -5,7 +5,6 @@ export default class Results extends React.Component {
   render() {
     return (
       <div id="results">
-        <h4>Tennis Betting ~ {this.props.year} Season</h4>
         <div className="amount">
           <p>Amount</p>
           <h3 className={(this.props.results.amount < 0 ? 'amountneg' : 'amountpos')}>
