@@ -21,7 +21,7 @@ class DataFilter {
       if (bet.result === 'p') { push++; }
       invested += bet.bet;
     });
-    record = win + ' - ' + loss + ' - ' + push;
+    record = win + '-' + loss + '-' + push;
     amount = Math.round(amount*100) / 100;
     roi = (amount/invested * 100).toFixed(3)/1;
     return {amount, record, roi};
