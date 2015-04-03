@@ -4,15 +4,35 @@ import LeagueToggle from '../../common/league_toggle';
 import Results from '../../common/results';
 import LineChart from '../../common/charts/d3_line_chart';
 import {Table, Sort} from 'reactable';
+import $ from 'jquery';
 
 
 export default class HomePage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      width: $(window).width()
+    };
+  }
+
   componentWillMount() {
+    window.addEventListener('resize', this.updateDimensions.bind(this));
     this.setState(this.refreshData(this.props.data));
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.updateDimensions);
   }
 
   componentWillReceiveProps(nextProps) {
     this.setState(this.refreshData(nextProps.data));
+  }
+
+  updateDimensions() {
+    this.setState({
+      width: $(window).width(),
+      height: $(window).height()
+    });
   }
 
   refreshData(data) {
@@ -40,7 +60,7 @@ export default class HomePage extends React.Component {
         <Results
           results={this.state.results} />
         <LineChart
-          width="700"
+          width={this.state.width}
           height="300"
           bets={this.state.bets} />
         <Table

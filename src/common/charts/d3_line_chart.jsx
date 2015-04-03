@@ -3,11 +3,11 @@ import d3 from 'd3';
 import _ from 'lodash';
 import accounting from 'accounting';
 import moment from 'moment';
+import $ from 'jquery';
 
 require('./d3_line_chart.scss');
 
 export default class LineChart extends React.Component {
-
   componentDidMount() {
     this.drawChart();
   }
@@ -18,9 +18,9 @@ export default class LineChart extends React.Component {
 
   makeTooltip(bet) {
     var line = bet.line > 0 ? '+' + bet.line : bet.line;
-    if (bet.bettype === 'total') { line = ''; };
+    if (bet.bettype === 'total') line = '';
     var payoutClass = bet.payout > 0 ? 'betpos' : 'betneg';
-    if (bet.payout === 0) { payoutClass = 'betpush'; };
+    if (bet.payout === 0) payoutClass = 'betpush';
     var payout = accounting.formatMoney(bet.payout);
     var amountClass = bet.amount > 0 ? 'amountpos' : 'amountneg';
     var amount = accounting.formatMoney(bet.amount);

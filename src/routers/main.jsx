@@ -4,7 +4,6 @@ let { Route, DefaultRoute, RouteHandler, Link, Redirect } = Router;
 
 import HomePage from '../pages/home/page';
 
-
 export default class MainRouter extends React.Component {
   render() {
     return (

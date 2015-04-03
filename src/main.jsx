@@ -2,6 +2,7 @@ import 'babel-core/polyfill';
 
 import React from 'react';
 import Router from 'react-router';
+import $ from 'jquery';
 
 import MainRouter from './routers/main';
 
@@ -21,6 +22,6 @@ Router.run(routes, Router.HistoryLocation, function(Handler, state) {
 });
 
 // Boostrap
-window.jQuery = require('jquery');
+window.jQuery = $;
 require('bootstrap-webpack');
 require('./main.scss');
