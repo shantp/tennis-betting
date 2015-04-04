@@ -55,9 +55,18 @@ export default class LineChart extends React.Component {
       let d = x0 - d0.dateObj > d1.dateObj - x0 ? d1: d0;
       let chartTop = d3.select('#linechart').node().offsetTop;
       let tooltipHTML = React.renderToString(<LineChartTooltip data={d} />);
+      let tooltipWidth = tooltip.node().getBoundingClientRect().width;
+      let tooltipHeight = tooltip.node().getBoundingClientRect().height;
+      let horzPosition;
+      let vertPosition = y(d.amount) + chartTop;
+      if (x(d.dateObj) < width - tooltipWidth) {
+        horzPosition = x(d.dateObj) + 90;
+      } else {
+        horzPosition = x(d.dateObj) - tooltipWidth;
+      }
+      if (y(d.amount) > chartTop - tooltipHeight) vertPosition -= tooltipHeight/2;
       tooltip.html(tooltipHTML);
-      tooltip.style('left', (x(d.dateObj) + margin.left + 10 + 'px'))
-        .style('top', (y(d.amount) + chartTop + 'px'));
+      tooltip.style('left', horzPosition + 'px').style('top', vertPosition + 'px');
     };
 
     _.each(this.props.bets, (d) => {

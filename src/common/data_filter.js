@@ -103,7 +103,7 @@ class DataFilter {
         days.push({
           date: bet.date,
           amount: amount,
-          bets: dayBets
+          bets: _.sortBy(dayBets, 'payout').reverse()
         });
       }
     });
