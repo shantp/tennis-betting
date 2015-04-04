@@ -85,6 +85,31 @@ class DataFilter {
     return bets;
   }
 
+  getBetsGroupedByDate(data) {
+    let amount = 0;
+    let days = [];
+    let lastDay;
+    _.each(data, (bet) => {
+      if (bet.date !== lastDay) {
+        let dayBets = _.filter(data, {date: bet.date});
+        if (dayBets.length > 1) {
+          _.each(dayBets, (daybet) => {
+            amount += daybet.payout;
+          });
+        } else {
+          amount += bet.payout;
+        }
+        lastDay = bet.date;
+        days.push({
+          date: bet.date,
+          amount: amount,
+          bets: dayBets
+        });
+      }
+    });
+    return days;
+  }
+
 }
 
 let dataFilter = new DataFilter();

@@ -4,6 +4,7 @@ import _ from 'lodash';
 import accounting from 'accounting';
 import moment from 'moment';
 import $ from 'jquery';
+import LineChartTooltip from './d3_line_chart_tooltip';
 
 require('./d3_line_chart.scss');
 
@@ -16,34 +17,10 @@ export default class LineChart extends React.Component {
     this.drawChart();
   }
 
-  makeTooltip(bet) {
-    var line = bet.line > 0 ? '+' + bet.line : bet.line;
-    if (bet.bettype === 'total') line = '';
-    var payoutClass = bet.payout > 0 ? 'betpos' : 'betneg';
-    if (bet.payout === 0) payoutClass = 'betpush';
-    var payout = accounting.formatMoney(bet.payout);
-    var amountClass = bet.amount > 0 ? 'amountpos' : 'amountneg';
-    var amount = accounting.formatMoney(bet.amount);
-    var nicedate = moment(bet.date).format('MMMM Do YYYY');
-    return `
-      <div class="tipdate">
-        ${nicedate}
-      </div>
-      <div class="tipline">
-        ${bet.hero} ${line}
-      </div>
-      <div class="tippayout ${payoutClass}">
-        ${payout}
-      </div>
-      <div class="tipamount ${amountClass}">
-        ${amount}
-      </div>`;
-  }
-
   drawChart() {
     d3.selectAll('#linechart > *').remove();
 
-    let margin = {top: 20, right: 20, bottom: 30, left: 60};
+    let margin = {top: 20, right: 50, bottom: 30, left: 60};
     let width = this.props.width - margin.left - margin.right;
     let height = this.props.height - margin.top - margin.bottom;
 
@@ -77,7 +54,8 @@ export default class LineChart extends React.Component {
       let d1 = this.props.bets[i];
       let d = x0 - d0.dateObj > d1.dateObj - x0 ? d1: d0;
       let chartTop = d3.select('#linechart').node().offsetTop;
-      tooltip.html(this.makeTooltip(d));
+      let tooltipHTML = React.renderToString(<LineChartTooltip data={d} />);
+      tooltip.html(tooltipHTML);
       tooltip.style('left', (x(d.dateObj) + margin.left + 10 + 'px'))
         .style('top', (y(d.amount) + chartTop + 'px'));
     };

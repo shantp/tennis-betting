@@ -38,13 +38,15 @@ export default class HomePage extends React.Component {
   refreshData(data, league = '') {
     let bets = DataFilter.getBetsByLeague(data, league);
     let results = DataFilter.getResults(bets);
-    let typeresults = DataFilter.getResultsByType(bets);
-    let tourneyresults = DataFilter.getResultsByTourney(bets);
+    let typeResults = DataFilter.getResultsByType(bets);
+    let tourneyResults = DataFilter.getResultsByTourney(bets);
+    let lineChartBets = DataFilter.getBetsGroupedByDate(bets);
     return {
       bets,
       results,
-      typeresults,
-      tourneyresults
+      typeResults,
+      tourneyResults,
+      lineChartBets
     };
   }
 
@@ -62,11 +64,11 @@ export default class HomePage extends React.Component {
         <LineChart
           width={this.state.width}
           height="300"
-          bets={this.state.bets} />
+          bets={this.state.lineChartBets} />
         <Table
           className="table table-striped"
           id="types-table"
-          data={this.state.typeresults}
+          data={this.state.typeResults}
           sortable={["type",
           {
             column: "amount",
@@ -80,7 +82,7 @@ export default class HomePage extends React.Component {
         <Table
           className="table table-striped"
           id="tourney-table"
-          data={this.state.tourneyresults}
+          data={this.state.tourneyResults}
           sortable={["type",
           {
             column: "amount",
