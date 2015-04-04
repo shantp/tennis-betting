@@ -1,3 +1,13 @@
+.tooltip {
+    position: absolute;
+    pointer-events: none;
+    background: white;
+    border: 1px solid grey;
+    padding: 12px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+  }
+
 .tooltip-amount {
   font-size: 1.4em;
 }
@@ -5,5 +15,33 @@
 .tooltip-bet {
   div {
     display: inline-block;
+    height: 24px;
+    padding: 6px 10px 0;
+  }
+  &:first-child{
+    padding-left: 0;
+  }
+  &:nth-child(even) {
+    background: honeydew;
+  }
+}
+
+.tooltip-result {
+  width: 40px;
+  height: 20px;
+  padding: 6px 1px;
+  text-transform: uppercase;
+  text-align: center;
+  font: {
+    weight: bold;
+  }
+  &.w {
+    color: forestgreen;
+  }
+  &.l {
+    color: firebrick;
+  }
+  &.p {
+    color: #efefef;
   }
 }

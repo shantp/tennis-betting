@@ -4,3 +4,5 @@
  ✔ Add tournament results table @done (15-03-26 04:05)
  ✔ Add filter by league @done (15-04-03 12:34)
  ✔ Create dataset with changes in amount by day to remove duplicate date points on graph @done (15-04-03 13:57)
+ ☐ Sort bets in tooltip by amount
+ ☐ Add change in amount from last date to tooltip
