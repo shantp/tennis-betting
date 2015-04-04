@@ -1,8 +1,0 @@
- ✔ Fix routes to default to /2015 @done (15-03-25 21:07)
- ✔ Add bootstrap @done (15-03-25 23:05)
- ☐ Add bets route to list all bets in table
- ✔ Add tournament results table @done (15-03-26 04:05)
- ✔ Add filter by league @done (15-04-03 12:34)
- ✔ Create dataset with changes in amount by day to remove duplicate date points on graph @done (15-04-03 13:57)
- ☐ Sort bets in tooltip by amount
- ☐ Add change in amount from last date to tooltip
