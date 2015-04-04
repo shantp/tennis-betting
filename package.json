@@ -54,6 +54,7 @@
     "lodash": "^3.5.0",
     "moment": "^2.9.0",
     "node-sass": "^3.0.0-pre",
+    "normalize.css": "^3.0.3",
     "phantomjs": "^1.9.16",
     "react-hot-loader": "^1.2.3",
     "reactable": "^0.10.1",

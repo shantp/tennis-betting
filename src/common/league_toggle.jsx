@@ -54,7 +54,7 @@ export default class LeagueToggle extends React.Component {
   render() {
     let checks = this.renderCheckboxes();
     return (
-      <div className="form-inline">
+      <div className="league-toggle form-inline">
         {checks}
       </div>
     );

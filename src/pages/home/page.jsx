@@ -57,7 +57,6 @@ export default class HomePage extends React.Component {
   render() {
     return (
       <div>
-        <h4>Tennis Betting ~ {this.props.year} Season</h4>
         <LeagueToggle onLeagueChange={this.changeLeague.bind(this)} />
         <Results
           results={this.state.results} />

@@ -10,7 +10,9 @@ export default class LineChartTooltip extends React.Component {
     let line = bet.line > 0 ? '+' + bet.line : bet.line;
     let resultClass = 'tooltip-result ' + bet.result;
     let payoutClass = 'tooltip-payout ';
-    payoutClass += bet.payout > 0 ? 'positive' : 'negative';
+    if (bet.payout > 0) payoutClass+= 'positive';
+    if (bet.payout < 0) payoutClass+= 'negative';
+    if (bet.payout === 0) payoutClass+= 'push';
     return (
       <div className="tooltip-bet" key={index}>
         <div className={resultClass}>{bet.result}</div>

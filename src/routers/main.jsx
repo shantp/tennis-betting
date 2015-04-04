@@ -14,6 +14,7 @@ export default class MainRouter extends React.Component {
               <li><Link to="/2015">2015</Link></li>
               <li><Link to="/2014">2014</Link></li>
             </ul>
+            <h4>Tennis Betting ~ {this.props.year} Season</h4>
           </header>
         </div>
 

@@ -21,7 +21,8 @@ Router.run(routes, Router.HistoryLocation, function(Handler, state) {
   React.render(<Handler data={bets} year={year} />, document.getElementById(DOM_APP_EL_ID));
 });
 
-// Boostrap
+// Boostrap & Normalize
 window.jQuery = $;
+require('../node_modules/normalize.css/normalize.css');
 require('bootstrap-webpack');
 require('./main.scss');

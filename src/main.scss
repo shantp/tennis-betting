@@ -1,3 +1,5 @@
+$light-grey: #cecece;
+
 .positive {
     color: forestgreen;
 }
@@ -6,8 +8,48 @@
     color: firebrick;
 }
 
+.push {
+  color: #444;
+}
+
 .bettype {
   text-transform: capitalize;
+}
+
+header {
+  h4 {
+    padding: 12px;
+    font: {
+      size: 1.9em;
+      weight: 500;
+    }
+  }
+}
+
+#navigation {
+  ul {
+    background-color: honeydew;
+    height: 46px;
+    line-height: 40px;
+    padding-left: 10px;
+    padding-top: 5px;
+    border-bottom: 1px solid $light-grey;
+  }
+  li {
+    list-style: none;
+    display: inline-block;
+    padding: 0 12px;
+    margin-right: 12px;
+    width: 60px;
+    background: white;
+    border: 1px solid $light-grey;
+    border-bottom: 0px;
+    a {
+      &:active, &:hover {
+        color: $light-grey;
+      }
+    }
+  }
 }
 
 .reactable-column-header {
