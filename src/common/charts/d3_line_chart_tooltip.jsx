@@ -9,18 +9,20 @@ export default class LineChartTooltip extends React.Component {
   renderBet(bet, index) {
     let line = bet.line > 0 ? '+' + bet.line : bet.line;
     let resultClass = 'tooltip-result ' + bet.result;
+    let payoutClass = 'tooltip-payout ';
+    payoutClass += bet.payout > 0 ? 'positive' : 'negative';
     return (
       <div className="tooltip-bet" key={index}>
         <div className={resultClass}>{bet.result}</div>
         <div className="tooltip-hero">{bet.hero}</div>
         {bet.bettype !== 'total' ? <div className="tooltip-line">{line}</div> : null}
-        <div className="tooltip-payout">{accounting.formatMoney(bet.payout)}</div>
+        <div className={payoutClass}>{accounting.formatMoney(bet.payout)}</div>
       </div>
     );
   }
 
   render() {
-    let amountClass = this.props.data.amount > 0 ? 'amountpos' : 'amountneg';
+    let amountClass = this.props.data.amount > 0 ? 'positive' : 'negative';
     let bets = this.props.data.bets.map(this.renderBet);
     return (
       <div>
