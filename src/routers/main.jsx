@@ -28,9 +28,9 @@ export default class MainRouter extends React.Component {
 
 MainRouter.getRoutes = function() {
   return (
-    <Route name="app" path="/tennis-betting" handler={MainRouter}>
+    <Route name="app" path="/" handler={MainRouter}>
       <Route name="year" path="/:yearId" handler={HomePage} />
-      <Redirect from="/tennis-betting" to="/2015" />
+      <Redirect from="/" to="/2015" />
     </Route>
   );
 }
