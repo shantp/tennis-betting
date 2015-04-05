@@ -1,4 +1,5 @@
 $light-grey: #cecece;
+$push-grey: #444;
 
 .positive {
     color: forestgreen;
@@ -9,7 +10,7 @@ $light-grey: #cecece;
 }
 
 .push {
-  color: #444;
+  color: $push-grey;
 }
 
 .bettype {
@@ -52,8 +53,13 @@ header {
   }
 }
 
-.reactable-column-header {
+.table {
+  margin-top: 34px;
+  margin-left: 12px;
+}
 
+.reactable-column-header {
+  color: $push-grey;
 }
 
 .reactable-header-sort-asc:after {

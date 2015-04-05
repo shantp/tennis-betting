@@ -4,6 +4,7 @@ import MiniNav from '../../common/mini_nav';
 import Results from '../../common/results';
 import LineChart from '../../common/charts/d3_line_chart';
 import {Table, Sort} from 'reactable';
+import Footer from '../../common/footer';
 import $ from 'jquery';
 
 
@@ -87,7 +88,7 @@ export default class YearPage extends React.Component {
             sortFunction: Sort.Currency
           }]}
           columns={[
-            {key: "type", label: "Type"},
+            {key: "type", label: "Bet Type"},
             {key: "amount", label: "Amount"},
             {key: "record", label: "Record"},
           ]} />
@@ -101,10 +102,11 @@ export default class YearPage extends React.Component {
             sortFunction: Sort.Currency
           }]}
           columns={[
-            {key: "type", label: "Tournament"},
+            {key: "type", label: "Grand Slam"},
             {key: "amount", label: "Amount"},
             {key: "record", label: "Record"},
           ]} />
+        <Footer />
       </div>
     )
   }

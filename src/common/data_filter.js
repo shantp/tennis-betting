@@ -14,7 +14,8 @@ class DataFilter {
     let invested = 0;
     let roi = 0;
     let totalBets = data.length;
-    let averageBet;
+    // let avgBet;
+    let avgUnit;
     let unitsAmount;
     let unitsInvested;
     let record = {};
@@ -26,13 +27,14 @@ class DataFilter {
       invested += bet.bet;
     });
     unitsInvested = invested/100;
-    averageBet = unitsInvested * unitSize / totalBets;
+    // avgBet = unitsInvested * unitSize / totalBets;
+    avgUnit = (unitsInvested / totalBets).toFixed(1);
     record = win + '-' + loss + '-' + push;
     unitsAmount = amount/100;
     amount = unitsAmount * unitSize;
     // amount = Math.round(amount*100) / 100;
     roi = (amount/invested * 100).toFixed(3)/1;
-    return {amount, record, roi, averageBet, totalBets};
+    return {amount, record, roi, avgUnit, totalBets};
   }
 
   getResultsByType(data, unitSize) {

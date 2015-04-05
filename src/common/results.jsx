@@ -14,19 +14,19 @@ export default class Results extends React.Component {
           </h3>
         </div>
         <div className="record">
-          <p>Record</p>
+          <p>record</p>
           <h3>{this.props.results.record}</h3>
         </div>
         <div className="roi">
-          <p>ROI</p>
+          <p>roi</p>
           <h3>{this.props.results.roi}%</h3>
         </div>
         <div className="average">
-          <p>Average Bet Size</p>
-          <h3>{accounting.formatMoney(this.props.results.averageBet)}</h3>
+          <p>average unit bet</p>
+          <h3>{this.props.results.avgUnit}</h3>
         </div>
         <div className="total">
-          <p>Bets Made</p>
+          <p>bets placed</p>
           <h3>{this.props.results.totalBets}</h3>
         </div>
       </div>
