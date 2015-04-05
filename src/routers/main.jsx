@@ -30,7 +30,7 @@ MainRouter.getRoutes = function() {
   return (
     <Route name="app" path="/tennis-betting" handler={MainRouter}>
       <Route name="year" path="/:yearId" handler={HomePage} />
-      <Redirect from="/" to="/2015" />
+      <Redirect from="/tennis-betting" to="/2015" />
     </Route>
   );
 }

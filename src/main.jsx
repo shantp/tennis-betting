@@ -15,7 +15,7 @@ const DOM_APP_EL_ID = 'app';
 let routes = MainRouter.getRoutes();
 
 // Start the router
-Router.run(routes, Router.HistoryLocation, function(Handler, state) {
+Router.run(routes, function(Handler, state) {
   let year = state.pathname.slice(1);
   let bets = data[year];
   React.render(<Handler data={bets} year={year} />, document.getElementById(DOM_APP_EL_ID));
