@@ -2,7 +2,7 @@ import React from 'react';
 import Router from 'react-router';
 let { Route, DefaultRoute, RouteHandler, Link, Redirect } = Router;
 
-import HomePage from '../pages/home/page';
+import YearPage from '../pages/year/page';
 
 export default class MainRouter extends React.Component {
   render() {
@@ -29,7 +29,7 @@ export default class MainRouter extends React.Component {
 MainRouter.getRoutes = function() {
   return (
     <Route name="app" path="/" handler={MainRouter}>
-      <Route name="year" path="/:yearId" handler={HomePage} />
+      <Route name="year" path="/:yearId" handler={YearPage} />
       <Redirect from="/" to="/2015" />
     </Route>
   );

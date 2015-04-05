@@ -1,0 +1,25 @@
+.mini-nav {
+  padding: 6px 0 3px;
+  background: #f9f9f9;
+  border-top: 1px solid #cecece;
+  border-bottom: 1px solid #cecece;
+  margin-bottom: 20px;
+}
+
+.checkbox-inline {
+  text-transform: uppercase;
+  margin: 0 12px;
+}
+
+.unit-input {
+  margin-left: 20px;
+  font-weight: 400;
+  line-height: 18px;
+  input {
+    width: 66px;
+    margin-left: 4px;
+    &:invalid {
+      border:1px solid firebrick;
+    }
+  }
+}

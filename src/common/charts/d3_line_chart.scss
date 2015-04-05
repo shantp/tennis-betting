@@ -18,6 +18,11 @@
     stroke-width: 1.5px;
   }
 
+  .tick line {
+    stroke: #cecece;
+    stroke-dasharray: 3,6;
+  }
+
   .dot {
     fill: white;
     stroke: dodgerblue;

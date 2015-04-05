@@ -1,9 +1,9 @@
 import React from 'react';
 import _ from 'lodash';
 
-require('./league_toggle.scss');
+require('./mini_nav.scss');
 
-export default class LeagueToggle extends React.Component {
+export default class MiniNav extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -14,7 +14,7 @@ export default class LeagueToggle extends React.Component {
     };
   }
 
-  formChange(val) {
+  checkedChange(val) {
     let newBoxes = this.state.boxes.map(box => {
       return {
         value: box.value,
@@ -35,6 +35,13 @@ export default class LeagueToggle extends React.Component {
     this.setState({ boxes: newBoxes });
   }
 
+  unitsChange(e) {
+    let val = e.target.value;
+    let valid = e.target.validity.valid;
+    if (!val) val = 100;
+    if (valid) this.props.onUnitsChange(val);
+  }
+
   renderCheckboxes() {
     return this.state.boxes.map(box => {
       return (
@@ -44,18 +51,36 @@ export default class LeagueToggle extends React.Component {
             type="checkbox"
             checked={box.checked}
             disabled={box.disabled}
-            onChange={this.formChange.bind(this, box.value)}>
+            onChange={this.checkedChange.bind(this, box.value)}>
           </input> {box.value}
         </label>
       );
     });
   }
 
+  renderUnitInput() {
+    return (
+      <label className="unit-input">
+        Unit
+        <input
+          ref="unitInput"
+          id="unit"
+          type="number"
+          placeholder="100"
+          min={1}
+          max={100000}
+          onChange={this.unitsChange.bind(this)} />
+      </label>
+    );
+  }
+
   render() {
     let checks = this.renderCheckboxes();
+    let unit = this.renderUnitInput();
     return (
-      <div className="league-toggle form-inline">
+      <div className="mini-nav form-inline">
         {checks}
+        {unit}
       </div>
     );
   }

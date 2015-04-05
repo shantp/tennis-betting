@@ -31,7 +31,12 @@ export default class LineChart extends React.Component {
     let y = d3.scale.linear().range([height, 0]);
 
     let xAxis = d3.svg.axis().scale(x).orient('bottom');
-    let yAxis = d3.svg.axis().scale(y).orient('left');
+    let yAxis = d3.svg.axis()
+      .scale(y)
+      .orient('left')
+      .innerTickSize(-width)
+      .outerTickSize(0)
+      .tickPadding(10);
 
     let line = d3.svg.line()
       .x((d) => {return x(d.dateObj); })
@@ -54,7 +59,7 @@ export default class LineChart extends React.Component {
       let d1 = this.props.bets[i];
       let d = x0 - d0.dateObj > d1.dateObj - x0 ? d1: d0;
       let chartTop = d3.select('#linechart').node().offsetTop;
-      let tooltipHTML = React.renderToString(<LineChartTooltip data={d} />);
+      let tooltipHTML = React.renderToString(<LineChartTooltip data={d} unitSize={this.props.unitSize} />);
       let tooltipWidth = tooltip.node().getBoundingClientRect().width;
       let tooltipHeight = tooltip.node().getBoundingClientRect().height;
       let horzPosition;
@@ -87,11 +92,12 @@ export default class LineChart extends React.Component {
       .attr('class', 'y axis')
       .call(yAxis)
       .append('text')
-      .attr('transform', 'rotate(-90)')
-      .attr('y', 6)
+      // .attr('transform', 'rotate(-90)')
+      .attr('x', 0)
+      .attr('y', -15)
       .attr('dy', '.71em')
       .style('text-anchor', 'end')
-      .text('Amount ($)');
+      .text('Amount');
 
     svg.append('path')
       .datum(this.props.bets)

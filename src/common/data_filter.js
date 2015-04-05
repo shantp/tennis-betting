@@ -6,7 +6,7 @@ class DataFilter {
   constructor() {
   }
 
-  getResults(data) {
+  getResults(data, unitSize) {
     let amount = 0;
     let win = 0;
     let loss = 0;
@@ -15,6 +15,8 @@ class DataFilter {
     let roi = 0;
     let totalBets = data.length;
     let averageBet;
+    let unitsAmount;
+    let unitsInvested;
     let record = {};
     _.each(data, (bet) => {
       amount += bet.payout;
@@ -23,18 +25,21 @@ class DataFilter {
       if (bet.result === 'p') { push++; }
       invested += bet.bet;
     });
-    averageBet = invested/totalBets;
+    unitsInvested = invested/100;
+    averageBet = unitsInvested * unitSize / totalBets;
     record = win + '-' + loss + '-' + push;
-    amount = Math.round(amount*100) / 100;
+    unitsAmount = amount/100;
+    amount = unitsAmount * unitSize;
+    // amount = Math.round(amount*100) / 100;
     roi = (amount/invested * 100).toFixed(3)/1;
     return {amount, record, roi, averageBet, totalBets};
   }
 
-  getResultsByType(data) {
+  getResultsByType(data, unitSize) {
     let typeresults = [];
     _.each(this.getBetsByType(data), (type, name) => {
       let results = {};
-      results = this.getResults(type);
+      results = this.getResults(type, unitSize);
       results.type = name.charAt(0).toUpperCase() + name.slice(1);
       results.amount = accounting.formatMoney(results.amount);
       typeresults.push(results);
@@ -42,11 +47,11 @@ class DataFilter {
     return typeresults;
   }
 
-  getResultsByTourney(data) {
+  getResultsByTourney(data, unitSize) {
     let tourneyresults = [];
     _.each(this.getBetsByTourney(data), (tourney, name) => {
       let results = {};
-      results = this.getResults(tourney);
+      results = this.getResults(tourney, unitSize);
       results.type = name;
       results.amount = accounting.formatMoney(results.amount);
       tourneyresults.push(results);
@@ -85,8 +90,10 @@ class DataFilter {
     return bets;
   }
 
-  getBetsGroupedByDate(data) {
+  getBetsGroupedByDate(data, unitSize) {
     let amount = 0;
+    let convertedAmount;
+    let unitsAmount;
     let days = [];
     let lastDay;
     _.each(data, (bet) => {
@@ -100,9 +107,12 @@ class DataFilter {
           amount += bet.payout;
         }
         lastDay = bet.date;
+        unitsAmount = amount/100;
+        convertedAmount = unitsAmount * unitSize;
+        convertedAmount = Math.round(convertedAmount*100) / 100;
         days.push({
           date: bet.date,
-          amount: amount,
+          amount: convertedAmount,
           bets: _.sortBy(dayBets, 'payout').reverse()
         });
       }

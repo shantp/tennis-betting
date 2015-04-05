@@ -1,17 +1,19 @@
 import React from 'react';
 import DataFilter from '../../common/data_filter';
-import LeagueToggle from '../../common/league_toggle';
+import MiniNav from '../../common/mini_nav';
 import Results from '../../common/results';
 import LineChart from '../../common/charts/d3_line_chart';
 import {Table, Sort} from 'reactable';
 import $ from 'jquery';
 
 
-export default class HomePage extends React.Component {
+export default class YearPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      width: $(window).width()
+      width: $(window).width(),
+      unitSize: 100,
+      league: ''
     };
   }
 
@@ -28,6 +30,8 @@ export default class HomePage extends React.Component {
     this.setState(this.refreshData(nextProps.data));
   }
 
+  componentWillUp
+
   updateDimensions() {
     this.setState({
       width: $(window).width(),
@@ -35,13 +39,15 @@ export default class HomePage extends React.Component {
     });
   }
 
-  refreshData(data, league = '') {
+  refreshData(data, league = this.state.league, unitSize = this.state.unitSize) {
     let bets = DataFilter.getBetsByLeague(data, league);
-    let results = DataFilter.getResults(bets);
-    let typeResults = DataFilter.getResultsByType(bets);
-    let tourneyResults = DataFilter.getResultsByTourney(bets);
-    let lineChartBets = DataFilter.getBetsGroupedByDate(bets);
+    let results = DataFilter.getResults(bets, unitSize);
+    let typeResults = DataFilter.getResultsByType(bets, unitSize);
+    let tourneyResults = DataFilter.getResultsByTourney(bets, unitSize);
+    let lineChartBets = DataFilter.getBetsGroupedByDate(bets, unitSize);
     return {
+      league,
+      unitSize,
       bets,
       results,
       typeResults,
@@ -54,13 +60,20 @@ export default class HomePage extends React.Component {
     this.setState(this.refreshData(this.props.data, league));
   }
 
+  changeUnitSize(value) {
+    this.setState(this.refreshData(this.props.data, this.state.league, Number(value)));
+  }
+
   render() {
     return (
       <div>
-        <LeagueToggle onLeagueChange={this.changeLeague.bind(this)} />
+        <MiniNav
+          onLeagueChange={this.changeLeague.bind(this)}
+          onUnitsChange={this.changeUnitSize.bind(this)} />
         <Results
           results={this.state.results} />
         <LineChart
+          unitSize={this.state.unitSize}
           width={this.state.width}
           height="300"
           bets={this.state.lineChartBets} />
