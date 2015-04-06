@@ -3,9 +3,12 @@ import DataFilter from '../../common/data_filter';
 import MiniNav from '../../common/mini_nav';
 import Results from '../../common/results';
 import LineChart from '../../common/charts/d3_line_chart';
+import Tabs from 'react-simpletabs';
 import {Table, Sort} from 'reactable';
 import Footer from '../../common/footer';
 import $ from 'jquery';
+
+require('./tabs.scss');
 
 
 export default class YearPage extends React.Component {
@@ -78,34 +81,40 @@ export default class YearPage extends React.Component {
           width={this.state.width}
           height="300"
           bets={this.state.lineChartBets} />
-        <Table
-          className="table table-striped"
-          id="types-table"
-          data={this.state.typeResults}
-          sortable={["type",
-          {
-            column: "amount",
-            sortFunction: Sort.Currency
-          }]}
-          columns={[
-            {key: "type", label: "Bet Type"},
-            {key: "amount", label: "Amount"},
-            {key: "record", label: "Record"},
-          ]} />
-        <Table
-          className="table table-striped"
-          id="tourney-table"
-          data={this.state.tourneyResults}
-          sortable={["type",
-          {
-            column: "amount",
-            sortFunction: Sort.Currency
-          }]}
-          columns={[
-            {key: "type", label: "Grand Slam"},
-            {key: "amount", label: "Amount"},
-            {key: "record", label: "Record"},
-          ]} />
+        <Tabs>
+          <Tabs.Panel title='Bet Types'>
+            <Table
+              className="table table-striped"
+              id="types-table"
+              data={this.state.typeResults}
+              sortable={["type",
+              {
+                column: "amount",
+                sortFunction: Sort.Currency
+              }]}
+              columns={[
+                {key: "type", label: "Type"},
+                {key: "amount", label: "Amount"},
+                {key: "record", label: "Record"},
+              ]} />
+          </Tabs.Panel>
+          <Tabs.Panel title='Grand Slams'>
+            <Table
+              className="table table-striped"
+              id="tourney-table"
+              data={this.state.tourneyResults}
+              sortable={["type",
+              {
+                column: "amount",
+                sortFunction: Sort.Currency
+              }]}
+              columns={[
+                {key: "type", label: "Tournament"},
+                {key: "amount", label: "Amount"},
+                {key: "record", label: "Record"},
+              ]} />
+          </Tabs.Panel>
+        </Tabs>
         <Footer />
       </div>
     )

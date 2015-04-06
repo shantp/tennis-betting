@@ -17,6 +17,35 @@
   margin: 7px 0;
 }
 
+.tooltip-change {
+  position: absolute;
+  top: 12px;
+  right: 20px;
+  font: {
+    size: 1.2em;
+    weight: 600;
+  }
+  .arrow-up {
+    float: left;
+    width: 0;
+    height: 0;
+    margin: 5px 5px 0 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid forestgreen;
+  }
+
+  .arrow-down {
+    float: left;
+    width: 0;
+    height: 0;
+    margin: 5px 5px 0 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 8px solid firebrick;
+  }
+}
+
 .tooltip-bet {
   div {
     display: inline-block;

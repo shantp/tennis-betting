@@ -14,7 +14,6 @@ class DataFilter {
     let invested = 0;
     let roi = 0;
     let totalBets = data.length;
-    // let avgBet;
     let avgUnit;
     let unitsAmount;
     let unitsInvested;
@@ -27,12 +26,10 @@ class DataFilter {
       invested += bet.bet;
     });
     unitsInvested = invested/100;
-    // avgBet = unitsInvested * unitSize / totalBets;
     avgUnit = (unitsInvested / totalBets).toFixed(1);
     record = win + '-' + loss + '-' + push;
     unitsAmount = amount/100;
     amount = unitsAmount * unitSize;
-    // amount = Math.round(amount*100) / 100;
     roi = (amount/invested * 100).toFixed(3)/1;
     return {amount, record, roi, avgUnit, totalBets};
   }
@@ -96,8 +93,10 @@ class DataFilter {
     let amount = 0;
     let convertedAmount;
     let unitsAmount;
+    let lastUnitsAmount;
     let days = [];
     let lastDay;
+    let change;
     _.each(data, (bet) => {
       if (bet.date !== lastDay) {
         let dayBets = _.filter(data, {date: bet.date});
@@ -108,13 +107,16 @@ class DataFilter {
         } else {
           amount += bet.payout;
         }
-        lastDay = bet.date;
         unitsAmount = amount/100;
+        change = unitsAmount - lastUnitsAmount;
+        lastUnitsAmount = unitsAmount;
+        lastDay = bet.date;
         convertedAmount = unitsAmount * unitSize;
         convertedAmount = Math.round(convertedAmount*100) / 100;
         days.push({
           date: bet.date,
           amount: convertedAmount,
+          change: change,
           bets: _.sortBy(dayBets, 'payout').reverse()
         });
       }

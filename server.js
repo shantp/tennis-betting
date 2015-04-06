@@ -48,8 +48,7 @@ new WebpackDevServer(webpack(config), {
  *****************/
 
 var server = app.listen(8080, function () {
-  var host = server.address().address;
   var port = server.address().port;
 
-  console.log('Essential React listening at http://%s:%s', host, port);
+  console.log('Essential React listening at %s', port);
 });

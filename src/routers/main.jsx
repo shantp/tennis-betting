@@ -8,16 +8,15 @@ export default class MainRouter extends React.Component {
   render() {
     return (
       <div id="container">
-        <div id="navigation">
-          <header>
-            <ul>
-              <li><Link to="/2015">2015</Link></li>
-              <li><Link to="/2014">2014</Link></li>
+        <header>
+          <nav id="navigation">
+            <ul className="year-menu">
+              <li className="year-menu-item"><Link to="/2015">2015</Link></li>
+              <li className="year-menu-item"><Link to="/2014">2014</Link></li>
             </ul>
-            <h4>Tennis Betting ~ {this.props.year} Season</h4>
-          </header>
-        </div>
-
+          </nav>
+          <h4>Tennis Betting ~ {this.props.year} Season</h4>
+        </header>
         <div id="main">
           <RouteHandler {...this.props} />
         </div>

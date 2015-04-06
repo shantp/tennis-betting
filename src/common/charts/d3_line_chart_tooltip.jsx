@@ -24,6 +24,24 @@ export default class LineChartTooltip extends React.Component {
     );
   }
 
+  renderChange(change) {
+    let arrow;
+    let changeClass = "tooltip-change ";
+    if (change > 0) {
+      arrow = <div className="arrow-up"></div>;
+      changeClass += 'positive';
+    } else if (change < 0) {
+      arrow = <div className="arrow-down"></div>;
+      changeClass += 'negative';
+    }
+    return (
+      <div className={changeClass}>
+        {arrow}
+        {accounting.formatMoney(change * this.props.unitSize)}
+      </div>
+    );
+  }
+
   render() {
     let amountClass = this.props.data.amount > 0 ? 'positive' : 'negative';
     let bets = this.props.data.bets.map(this.renderBet.bind(this));
@@ -35,6 +53,7 @@ export default class LineChartTooltip extends React.Component {
         <div className={"tooltip-amount " + amountClass}>
           {accounting.formatMoney(this.props.data.amount)}
         </div>
+        {!isNaN(this.props.data.change) && this.props.data.change !== 0 ? this.renderChange(this.props.data.change) : null}
         <div className="tooltip-bets">
           {bets}
         </div>
