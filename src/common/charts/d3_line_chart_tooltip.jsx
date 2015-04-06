@@ -50,10 +50,12 @@ export default class LineChartTooltip extends React.Component {
         <div className="tooltip-date">
           {moment(this.props.data.date).format('MMMM Do YYYY')}
         </div>
-        <div className={"tooltip-amount " + amountClass}>
-          {accounting.formatMoney(this.props.data.amount)}
+        <div className="tooltip-status">
+          <div className={"tooltip-amount " + amountClass}>
+            {accounting.formatMoney(this.props.data.amount)}
+          </div>
+          {!isNaN(this.props.data.change) && this.props.data.change !== 0 ? this.renderChange(this.props.data.change) : null}
         </div>
-        {!isNaN(this.props.data.change) && this.props.data.change !== 0 ? this.renderChange(this.props.data.change) : null}
         <div className="tooltip-bets">
           {bets}
         </div>

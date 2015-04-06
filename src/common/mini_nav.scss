@@ -1,17 +1,24 @@
 .mini-nav {
-  padding: 6px 0 3px 9px;
+  min-height: 33px;
+  padding: 3px 9px 3px;
   background: #f9f9f9;
   border-top: 1px solid #cecece;
   border-bottom: 1px solid #cecece;
   margin-bottom: 20px;
+  line-height: 21px;
+  font: {
+    size: 0.84em;
+  }
 }
 
 .checkbox-inline {
   text-transform: uppercase;
   margin: 0 6px;
+  padding: 3px;
 }
 
 .unit-input {
+  float: right;
   margin-left: 20px;
   font-weight: 400;
   line-height: 18px;

@@ -30,7 +30,7 @@ class DataFilter {
     record = win + '-' + loss + '-' + push;
     unitsAmount = amount/100;
     amount = unitsAmount * unitSize;
-    roi = (amount/invested * 100).toFixed(3)/1;
+    roi = (amount/invested * 100).toFixed(2)/1;
     return {amount, record, roi, avgUnit, totalBets};
   }
 

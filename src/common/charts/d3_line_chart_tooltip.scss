@@ -1,4 +1,5 @@
 .tooltip {
+    min-width: 200px;
     position: absolute;
     pointer-events: none;
     background: white;
@@ -12,15 +13,21 @@
   font-size: 0.9em;
 }
 
+.tooltip-status {
+  border-bottom: 1px solid #cecece;
+}
+
 .tooltip-amount {
-  font-size: 1.4em;
+  display: inline-block;
+  font-size: 1.7em;
   margin: 7px 0;
 }
 
 .tooltip-change {
-  position: absolute;
-  top: 12px;
-  right: 20px;
+  float: right;
+  margin-top: 10px;
+  margin-right: 9px;
+  padding-bottom: 12px;
   font: {
     size: 1.2em;
     weight: 600;
@@ -44,6 +51,10 @@
     border-right: 8px solid transparent;
     border-top: 8px solid firebrick;
   }
+}
+
+.tooltip-bets {
+  margin-top: 12px;
 }
 
 .tooltip-bet {

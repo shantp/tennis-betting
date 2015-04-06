@@ -79,7 +79,7 @@ export default class YearPage extends React.Component {
         <LineChart
           unitSize={this.state.unitSize}
           width={this.state.width}
-          height="300"
+          height="288"
           bets={this.state.lineChartBets} />
         <Tabs>
           <Tabs.Panel title='Bet Types'>
